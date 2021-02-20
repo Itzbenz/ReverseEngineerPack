@@ -5,8 +5,8 @@ import java.util.Arrays;
 //javac Main.java
 //java Main https://your_url_to_jar_file.jar Main.EntryPoint --Argument here
 //Tested with java 11
-public class Main {
-    public static JarExecutor lib;
+public class JarExecutor {
+    public static JarLoader lib;
   
     public static void main(String[] args) throws Throwable{
         System.out.println("Hacking time");
