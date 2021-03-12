@@ -14,6 +14,8 @@ public class JarExecutor {
         System.out.println("Hacking time");
         URL jar = new URL(args[0]);
         File temp = new File(System.getProperty("java.io.tmpdir"), jar.getFile());
+        if(!temp.getParentFile().exists())
+            System.out.println(temp.getAbsolutePath()+ ": "+ temp.getParentFile().mkdirs());
         if(!temp.exists()) {
             FileOutputStream o = new FileOutputStream(temp);
             o.write(jar.openStream().readAllBytes());
