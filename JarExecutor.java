@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -10,7 +12,15 @@ public class JarExecutor {
   
     public static void main(String[] args) throws Throwable{
         System.out.println("Hacking time");
-        lib = new JarLoader(new URL[]{new URL(args[0])}, ClassLoader.getSystemClassLoader());
+        URL jar = new URL(args[0]);
+        File temp = new File(System.getProperty("java.io.tmpdir"), jar.getFile());
+        if(!temp.exists()) {
+            FileOutputStream o = new FileOutputStream(temp);
+            o.write(jar.openStream().readAllBytes());
+            o.close();
+        }
+        
+        lib = new JarLoader(new URL[]{temp.toURI().toURL()}, ClassLoader.getSystemClassLoader());
         System.out.println("Downloading: " + args[0]);
         Class<?> mainClass = lib.loadClass(args[1]);
         Method m = mainClass.getMethod("main", String[].class);
