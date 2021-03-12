@@ -14,7 +14,8 @@ public class Javac {
 		temp.delete();
 		Files.writeString(temp.toPath(), code, StandardOpenOption.WRITE, StandardOpenOption.CREATE_NEW);
 		temp.deleteOnExit();
-		System.out.println("javac: " + new ProcessBuilder("javac " +temp.getAbsolutePath()).redirectError(ProcessBuilder.Redirect.PIPE).redirectOutput(ProcessBuilder.Redirect.PIPE).start().exitValue());
-		System.out.println("java: " + new ProcessBuilder("java " + new File(temp.getParent(), "Src").getAbsolutePath()).redirectError(ProcessBuilder.Redirect.PIPE).redirectOutput(ProcessBuilder.Redirect.PIPE).start().exitValue());
+		System.out.println("javac: " + (Runtime.getRuntime().exec("javac").exitValue() == 0 ? "Exists" : "Nope"));
+		System.out.println("javac: " + new ProcessBuilder("javac", temp.getAbsolutePath()).redirectError(ProcessBuilder.Redirect.PIPE).redirectOutput(ProcessBuilder.Redirect.PIPE).start().exitValue());
+		System.out.println("java: " + new ProcessBuilder("java", new File(temp.getParent(), "Src").getAbsolutePath()).redirectError(ProcessBuilder.Redirect.PIPE).redirectOutput(ProcessBuilder.Redirect.PIPE).start().exitValue());
 	}
 }
