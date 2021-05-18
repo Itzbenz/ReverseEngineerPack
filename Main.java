@@ -79,7 +79,7 @@ public class Main {
             ArrayList<URL> ping = new ArrayList<>();
             for (String ss : s.split(" ")) {
                 try {
-                    ss = (ss.endsWith("/") ? "" : "/") + "assad";
+                    ss = ss + (ss.endsWith("/") ? "" : "/") + "assad";
                     ping.add(new URL(ss));
                     System.out.println("Registered: " + ss);
                 }catch(MalformedURLException e){
